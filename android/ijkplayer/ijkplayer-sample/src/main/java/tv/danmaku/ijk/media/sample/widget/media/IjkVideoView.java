@@ -1204,6 +1204,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 
     public void selectTrack(int stream) {
         MediaPlayerCompat.selectTrack(mMediaPlayer, stream);
+        seekTo(getCurrentPosition());
     }
 
     public void deselectTrack(int stream) {

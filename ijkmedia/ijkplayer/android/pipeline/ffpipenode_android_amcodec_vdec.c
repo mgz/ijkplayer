@@ -1149,22 +1149,25 @@ static void syncToMaster(IJKAM_Pipenode_Opaque *opaque)
 
     int64_t delta = am_time_sub(pts_audio, pts_pcrscr);
 
+
+#if TIMING_DEBUG
+    ALOGD("pts_video:%lld pts_audio:%lld pts_pcrscr:%lld delta:%lld offset:%lld last_pts:%lld slept:%d sync_master:%d serials:%d vs %d",
+        pts_video, pts_audio, pts_pcrscr, delta, offset, last_pts, slept, is->av_sync_type, is->audclk.serial, d->pkt_serial);
+#endif
+
     // modify pcrscr so that the frame presentation times are adjusted 'instantly'
-    if(is->audclk.serial == d->pkt_serial) {
+    if(is->audclk.serial != -1) {//== d->pkt_serial) {
         if(abs(delta) > 5000) {
+
             set_pts_pcrscr(pts_pcrscr + delta);
+
             ALOGD("set pcr %lld!", pts_pcrscr + delta);
         }
 
         opaque->do_discontinuity_check = 1;
     }
 
-#if TIMING_DEBUG
-    ALOGD("pts_video:%lld pts_audio:%lld pts_pcrscr:%lld delta:%lld offset:%lld last_pts:%lld slept:%d sync_master:%d",
-        pts_video, pts_audio, pts_pcrscr, delta, offset, last_pts, slept, get_master_sync_type(is));
-#endif
 }
-
 
 static int write_header(am_private_t *para, am_packet_t *pkt)
 {
