@@ -1,0 +1,37 @@
+diff --git a/libavformat/utils.c b/libavformat/utils.c
+index 67d4d1b..9c580b1 100644
+--- a/libavformat/utils.c
++++ b/libavformat/utils.c
+@@ -3281,6 +3281,7 @@ int avformat_find_stream_info(AVFormatContext *ic, AVDictionary **options)
+ 
+     count     = 0;
+     read_size = 0;
++    int has_width = 0;
+     for (;;) {
+         int analyzed_all_streams;
+         if (ff_check_interrupt(&ic->interrupt_callback)) {
+@@ -3294,6 +3295,11 @@ int avformat_find_stream_info(AVFormatContext *ic, AVDictionary **options)
+             int fps_analyze_framecount = 20;
+ 
+             st = ic->streams[i];
++            // 
++            if ((st->codec->codec_type == AVMEDIA_TYPE_VIDEO) && (st->codec->width)) {
++        	has_width = 1;
++        	av_log(ic, AV_LOG_WARNING, "Got width!\n");
++            }
+             if (!has_codec_parameters(st, NULL))
+                 break;
+             /* If the timebase is coarse (like the usual millisecond precision
+@@ -3340,10 +3346,10 @@ int avformat_find_stream_info(AVFormatContext *ic, AVDictionary **options)
+             }
+         }
+         /* We did not get all the codec info, but we read too much data. */
+-        if (read_size >= probesize) {
++        if (((read_size >= probesize) && (has_width)) || (read_size >= probesize*10)) {
+             ret = count;
+             av_log(ic, AV_LOG_DEBUG,
+-                   "Probe buffer size limit of %"PRId64" bytes reached\n", probesize);
++                   "Probe buffer size limit of %"PRId64" bytes reached\n", read_size);
+             for (i = 0; i < ic->nb_streams; i++)
+                 if (!ic->streams[i]->r_frame_rate.num &&
+                     ic->streams[i]->info->duration_count <= 1 &&
