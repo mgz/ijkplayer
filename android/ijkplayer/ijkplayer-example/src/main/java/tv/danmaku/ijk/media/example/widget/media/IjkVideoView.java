@@ -1036,7 +1036,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
 //                    if (mSettings.getUsingAmlogic()) {
 //                        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "amlogic", 1);
 //                    } else {
-                        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "amlogic", 0);
+//                        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "amlogic", 0);
 //                    }
 
 //                    if (mSettings.getUsingMediaCodec()) {
