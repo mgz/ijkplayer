@@ -67,10 +67,10 @@ public class SampleMediaListFragment extends Fragment {
             }
         });
 
-        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/perviy_hd/index.m3u8", "Perv HD");
-        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/perviy/index.m3u8", "Perv");
-        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/viasatsport/index.m3u8", "Viasat Sport");
-        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/rossia_1_plus_6/index.m3u8", "Rossia Plus");
+        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/perviy_hd/mpegts", "Perv HD");
+        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/perviy/mpegts", "Perv");
+        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/viasatsport/mpegts", "Viasat Sport");
+        mAdapter.addItem("http://out1.iptv.atlanttv.com:8080/rossia_1_plus_6/mpegts", "Rossia Plus");
         mAdapter.addItem("http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear4/prog_index.m3u8", "bipbop basic 960x720 @ 2 Mbps");
         mAdapter.addItem("http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/gear0/prog_index.m3u8", "bipbop basic 22.050Hz stereo @ 40 kbps");
         mAdapter.addItem("http://devimages.apple.com.edgekey.net/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8", "bipbop advanced master playlist");
